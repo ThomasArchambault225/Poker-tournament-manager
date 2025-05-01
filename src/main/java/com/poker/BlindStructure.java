@@ -4,11 +4,12 @@ package com.poker;
  * Represents the blind structure of the tournament
  */
 public class BlindStructure extends TournamentComponent {
+    private int smallBlind = 50;
+    private int bigBlind = 100;
 
-    /**
-     * Sets up the blind structure
-     */
-    public void setupBlinds() {
-        //TODO: implement
+    public void incrementBlinds() {
+        smallBlind += 25;
+        bigBlind += 50;
+        System.out.println("Blinds increased to: SB=" + smallBlind + ", BB=" + bigBlind);
     }
 }

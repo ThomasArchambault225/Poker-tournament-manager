@@ -7,31 +7,34 @@ public class Player extends User implements Playable, Comparable<Player> {
     private int chips;
     private String status;
 
-    /**
-     * Constructs a Player with a name and ID
-     * @param name the player's name
-     * @param id the player's ID
-     */
     public Player(String name, int id) {
-        //TODO: implement
+        this.name = name;
+        this.id = id;
+        this.chips = 1000; // default starting chips
+        this.status = "Active";
     }
 
-    /**
-     * Simulates playing a hand
-     */
     @Override
     public void playHand() {
-        //TODO: implement
+        int bet = (int)(Math.random() * 200); // Simulate a random bet
+        chips -= bet;
+        if (chips <= 0) {
+            chips = 0;
+            status = "Eliminated";
+        }
+        System.out.println(name + " played a hand and now has " + chips + " chips.");
     }
 
-    /**
-     * Compares two players by chip count
-     * @param other another Player
-     * @return comparison result
-     */
     @Override
     public int compareTo(Player other) {
-        //TODO: implement
-        return 0;
+        return Integer.compare(other.chips, this.chips);
+    }
+
+    public int getChips() {
+        return chips;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

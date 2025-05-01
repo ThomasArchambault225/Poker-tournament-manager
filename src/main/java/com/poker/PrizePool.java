@@ -5,10 +5,8 @@ package com.poker;
  */
 public class PrizePool extends TournamentComponent {
 
-    /**
-     * Calculates the prize pool.
-     */
+    // To be implemented in Deliverable 3
     public void calculatePrizes() {
-        //TODO: implement
+        System.out.println("Prize pool calculation (stub).");
     }
 }

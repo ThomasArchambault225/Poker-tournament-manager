@@ -6,21 +6,28 @@ import java.io.*;
  * Logs tournament data to a file.
  */
 public class TournamentLogger {
+    private final String logFile = "tournament_log.txt";
 
-    /**
-     * Writes logs to a file.
-     * @param message the log message
-     */
     public void writeLog(String message) {
-        //TODO: implement
+        try (FileWriter fw = new FileWriter(logFile, true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+            out.println(message);
+        } catch (IOException e) {
+            System.err.println("Error writing log: " + e.getMessage());
+        }
     }
 
-    /**
-     * Reads logs from a file.
-     * @return log content
-     */
     public String read() {
-        //TODO: implement
-        return null;
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(logFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading log: " + e.getMessage());
+        }
+        return sb.toString();
     }
 }
