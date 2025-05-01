@@ -1,10 +1,11 @@
+package com.poker;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for BlindStructure
+ * Test class for PlayerNameComparator
  */
-public class BlindStructureTest {
+public class PlayerNameComparatorTest {
 
     @Test
     public void testPlaceholder() {

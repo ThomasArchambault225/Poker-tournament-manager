@@ -1,10 +1,11 @@
+package com.poker;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for Admin
+ * Test class for BlindStructure
  */
-public class AdminTest {
+public class BlindStructureTest {
 
     @Test
     public void testPlaceholder() {

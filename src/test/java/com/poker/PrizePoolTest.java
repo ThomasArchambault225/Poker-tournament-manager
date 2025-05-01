@@ -1,10 +1,11 @@
+package com.poker;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for TournamentLogger
+ * Test class for PrizePool
  */
-public class TournamentLoggerTest {
+public class PrizePoolTest {
 
     @Test
     public void testPlaceholder() {

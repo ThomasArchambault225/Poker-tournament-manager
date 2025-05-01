@@ -1,10 +1,11 @@
+package com.poker;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Test class for Table
+ * Test class for Admin
  */
-public class TableTest {
+public class AdminTest {
 
     @Test
     public void testPlaceholder() {
