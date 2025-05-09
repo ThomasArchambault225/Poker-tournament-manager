@@ -1,10 +1,11 @@
 package com.poker;
 
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Represents the prize pool of the tournament.
+ * Represents the prize pool of the tournament with robust error handling.
  */
 public class PrizePool extends TournamentComponent {
 
@@ -21,10 +22,20 @@ public class PrizePool extends TournamentComponent {
             return;
         }
 
-        int totalPrizePool = players.size() * buyIn;
+        if (buyIn <= 0) {
+            System.out.println("Invalid buy-in amount.");
+            return;
+        }
+
+        // Filter out the players with null names
+        List<Player> validPlayers = players.stream()
+                .filter(p -> p.getName() != null)
+                .collect(Collectors.toList());
+
+        int totalPrizePool = validPlayers.size() * buyIn;
         System.out.println("Total prize pool: $" + totalPrizePool);
 
-        List<Player> topPlayers = players.stream()
+        List<Player> topPlayers = validPlayers.stream()
                 .sorted()
                 .limit(3)
                 .collect(Collectors.toList());
@@ -53,5 +64,44 @@ public class PrizePool extends TournamentComponent {
      */
     public Map<Player, Integer> getPrizeDistribution() {
         return prizeDistribution;
+    }
+
+    /**
+     * TournamentLogger with better error handling
+     */
+    public static class TournamentLogger {
+        private final String logFile = "tournament_log.txt";
+
+        public void writeLog(String message) {
+            if (message == null || message.isEmpty()) {
+                System.out.println("Cannot write null or empty message to log.");
+                return;
+            }
+            try (FileWriter fileWriter = new FileWriter(logFile, true);
+                 BufferedWriter bufferedWriterw = new BufferedWriter(fileWriter);
+                 PrintWriter out = new PrintWriter(bufferedWriterw)) {
+                out.println(message);
+            } catch (IOException e) {
+                System.err.println("Error writing log: " + e.getMessage());
+            }
+        }
+
+        public String read() {
+            StringBuilder stringBuilder = new StringBuilder();
+            File file = new File(logFile);
+            if (!file.exists()) {
+                System.out.println("Log file does not exist yet.");
+                return "";
+            }
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(logFile))) {
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line).append("\n");
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading log: " + e.getMessage());
+            }
+            return stringBuilder.toString();
+        }
     }
 }
